@@ -1,6 +1,5 @@
 const timeRange = ["2022年10月","2022年9月","2022年8月","2022年7月","2022年6月","2022年5月","2022年4月","2022年3月","2022年2月","2022年1月","2021年12月","2021年11月","2021年10月","2021年9月","2021年8月","2021年7月","2021年6月","2021年5月","2021年4月"];
 const dataNames = ["nursery_kashiwa_202210.geojson", "nursery_kashiwa_202209.geojson", "nursery_kashiwa_202208.geojson", "nursery_kashiwa_202207.geojson", "nursery_kashiwa_202206.geojson", "nursery_kashiwa_202205.geojson","nursery_kashiwa_202204.geojson", "nursery_kashiwa_202203.geojson", "nursery_kashiwa_202202.geojson", "nursery_kashiwa_202201.geojson", "nursery_kashiwa_202112.geojson", "nursery_kashiwa_202111.geojson", "nursery_kashiwa_202110.geojson", "nursery_kashiwa_202109.geojson", "nursery_kashiwa_202108.geojson", "nursery_kashiwa_202107.geojson", "nursery_kashiwa_202106.geojson", "nursery_kashiwa_202105.geojson", "nursery_kashiwa_202104.geojson"];
-//const refSource = ["https://www.city.kashiwa.lg.jp/documents/468/aki0410.pdf","https://www.city.kashiwa.lg.jp/documents/468/aki0409.pdf", "https://www.city.kashiwa.lg.jp/documents/468/aki0408.pdf", "https://www.city.kashiwa.lg.jp/documents/468/aki0407.pdf", "https://www.city.kashiwa.lg.jp/documents/468/aki0406.pdf", "https://www.city.kashiwa.lg.jp/documents/468/aki0405.pdf", "https://www.city.kashiwa.lg.jp/documents/468/aki0404.pdf", "https://www.city.kashiwa.lg.jp/documents/468/aki0403.pdf", "https://www.city.kashiwa.lg.jp/documents/468/aki0402.pdf", "https://www.city.kashiwa.lg.jp/documents/468/aki0401.pdf", "https://www.city.kashiwa.lg.jp/documents/468/aki0312.pdf", "https://www.city.kashiwa.lg.jp/documents/468/aki0311.pdf", "https://www.city.kashiwa.lg.jp/documents/468/aki0310.pdf", "https://www.city.kashiwa.lg.jp/documents/468/aki0309.pdf", "https://www.city.kashiwa.lg.jp/documents/468/aki0308.pdf", "https://www.city.kashiwa.lg.jp/documents/468/aki0307.pdf", "https://www.city.kashiwa.lg.jp/documents/468/aki0306.pdf", "https://www.city.kashiwa.lg.jp/documents/468/aki0305.pdf", "https://www.city.kashiwa.lg.jp/documents/468/r0304.pdf"];
 const refSource = ["468/aki0410.pdf","468/aki0409.pdf", "468/aki0408.pdf", "468/aki0407.pdf", "468/aki0406.pdf", "468/aki0405.pdf", "468/aki0404.pdf", "468/aki0403.pdf", "468/aki0402.pdf", "468/aki0401.pdf", "468/aki0312.pdf", "468/aki0311.pdf", "468/aki0310.pdf", "468/aki0309.pdf", "468/aki0308.pdf", "468/aki0307.pdf", "468/aki0306.pdf", "468/aki0305.pdf", "468/r0304.pdf"];
 
 const map = L.map('map', {
@@ -10,10 +9,10 @@ const map = L.map('map', {
     maxZoom: 18,
     condensedAttributionControl: false
 }).setView([35.8622,139.9709],13);
-//githubリンクを載せる
+
 L.control.condensedAttribution({
     emblem: '&copy;',
-    prefix: '<a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet-Слава Україні!</a> | <a href="https://www.city.kashiwa.lg.jp/haguhagu/index.html">柏市子育て情報 はぐはぐ柏</a>'
+    prefix: '<a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet-Слава Україні!</a> | <a href="https://www.city.kashiwa.lg.jp/haguhagu/index.html" target="_blank">柏市子育て情報 はぐはぐ柏</a> | <a href="https://github.com/sanskruthiya/kashiwa-nursery" target="_blank">Github</a>'
   }).addTo(map);
 
 const bounds = [[36.2000,139.8000], [35.5000,140.4000]];
@@ -72,7 +71,7 @@ function getColor_nursery(d){
 
 function onEachFeature_nursery_kl(feature, layer){
     let popupContent;
-    //ここを新設_保育園のケース追加
+    
     if (feature.properties.st_status_flag == "新設_保育園"){
         popupContent =
         '<table class="tablestyle02">'+
@@ -139,7 +138,7 @@ function onEachFeature_nursery_n(feature, layer){
         layer.bindPopup(popupStyle);
     }
 }
-//age0〜3の条件分岐について、feature.properties.st_ageX_flag == '-'の前にfeature.properties.st_ageX_flag == '新設'の場合の条件分けを追加
+
 const nursery_age3_layer = new L.geoJson([], {
                             filter: function(feature, layer) {
                                 return feature.properties.uid.startsWith('K') || feature.properties.uid.startsWith('L');
