@@ -201,7 +201,7 @@ const nursery_age0_layer = new L.geoJson([], {
                             onEachFeature: onEachFeature_nursery_kl,
                             pointToLayer: function(feature, latlng){
                                 if (feature.properties.st_age0_flag == '新設'){
-                                    return L.marker(latlng, {icon: L.AwesomeMarkers.icon({icon:'', markerColor:'lightgray', prefix:'fa', html:'新設'})});
+                                    return L.marker(latlng, {icon: L.AwesomeMarkers.icon({icon:'', markerColor:'blue', prefix:'fa', html:'新設'})});
                                 }
                                 else if (feature.properties.st_age0_flag == '-'){
                                     return L.marker(latlng, {icon: L.AwesomeMarkers.icon({icon:'', markerColor:'lightgray', prefix:'fa', html:'-'})});
@@ -299,7 +299,7 @@ const baseMaps = {
     '<i class="fas fa-map-marker-alt" style="color:#555"></i><i class="fa fa-caret-right fa-fw" style="color:#555"></i>保育・こども園 0歳 待ち人数': nursery_age0_layer
 };
 
-const slidemenutitle = '<h3 align="center">柏市保育園・幼稚園マップ<br>（更新：2022年10月1日）</h3>';
+const slidemenutitle = '<h3 align="center">柏市保育園・幼稚園マップ<br>（更新：2022年9月30日）</h3>';
 let contents ='<p class="remarks" align="center">この説明画面を閉じるには、ここの右斜め上にある <i class="fa fa-backward" style="color:grey"></i> ボタンを押してください。</p>';
 contents += '<h2>凡例</h2>'
 contents += '<table border="0" bordercolor="#999" cellpadding="5" cellspacing="0"><tr><td align="right" width="120"><i class="fas fa-map-marker-alt" style="color:red"></i> :</td><td width="180">10人以上</td></tr><tr><td align="right" width="120"><i class="fas fa-map-marker-alt" style="color:orangered"></i> :</td><td width="180">6人〜9人</td></tr><tr><td align="right" width="120"><i class="fas fa-map-marker-alt" style="color:orange"></i> :</td><td width="180">3人〜5人</td></tr><tr><td align="right" width="120"><i class="fas fa-map-marker-alt" style="color:green"></i> :</td><td width="180">1人〜2人</td></tr><tr><td align="right" width="120"><i class="fas fa-map-marker-alt" style="color:#1E90FF"></i> :</td><td width="180">0人（待機児童なし）</td></tr></table>';
