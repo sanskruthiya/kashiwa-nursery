@@ -1,0 +1,165 @@
+html, body {
+    margin: 0; height: 100%; width: 100%;
+    -webkit-text-size-adjust : 100%;
+}
+
+#map {
+    height: 100%;
+}
+
+h1 {
+    color:#333;
+    font-size: 21px; font-weight: 400; font-family:Helvetica , "游ゴシック", serif;
+    transform: scale(1, 1);
+}
+
+h2 {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color:#333;
+    font-size: 16px; font-weight: 100; font-family:Helvetica , "游ゴシック", serif;
+    transform: scale(1.1, 1);
+}
+
+h2:before, h2:after {
+    border-top: 1px solid;
+    content: "";
+    display: inline;
+    flex-grow: 1;
+}
+
+h2:before {
+    margin-right: 1.0em;
+}
+
+h2:after {
+    margin-left: 1.0em;
+}
+
+h3 {
+    color:#333;
+    font-size: 16px; font-weight: 400; font-family:Helvetica , "游ゴシック", serif;
+    transform: scale(1, 1);
+}
+
+hr {
+    background-color: #333;
+}
+
+hr.style01 {
+  border-top: 1px solid #ccc;
+}
+
+p.footer {
+    color:#777; font-size: 12px; font-weight: normal; font-family: serif;
+}
+
+p.remarks {
+    color:#333; font-size: 11px; font-weight: normal; font-family: Helvetica, "游ゴシック", serif; margin: 0.5em;
+}
+
+p.tipstyle01 {
+    color:#fff; font-size: 14px; font-weight: normal; font-family: serif;
+}
+
+p.tipstyle02 {
+    color:#191970; font-size: 11px; font-weight: 400; font-family: Helvetica, "游ゴシック", serif;
+}
+
+p.tipstyle03 {
+    color:#fff; font-size: 12px; font-weight: normal; font-family: Helvetica, serif, "游ゴシック";
+    background: rgba(10,10,10,0.6);
+}
+
+span.style01 {
+    background: linear-gradient(transparent 70%, #ffd700 70%);
+}
+
+table.tablestyle01 {
+    table-layout: auto; width: 100%;
+    color:#111; font-size: 12px; font-weight: 500; font-family: Helvetica, "游ゴシック", serif;
+    border-collapse: collapse; border:1px solid #777;
+}
+
+table.tablestyle01 th, table.tablestyle01 td{
+    padding:5px; text-align:left;
+    border-collapse: collapse; border:1px solid #777;
+}
+
+table.tablestyle02 {
+    table-layout: auto; width: 100%;
+    color:#111; font-size: 13px; font-weight: 500; font-family: Helvetica, "游ゴシック", serif;
+    border-collapse: collapse; border-spacing:0; border:1px solid #777;
+}
+
+table.tablestyle02 th, table.tablestyle02 td{
+    padding: 4px; text-align:left;
+}
+
+table.tablestyle02 tr:nth-child(odd){
+    background-color: #eee
+}
+
+ul, li {
+    padding-bottom :10px;
+    padding-right :10px;
+}
+
+.info {
+    padding: 0.5em 1em;
+    /*margin: 3em 0;*/
+    color: #232323;
+    border:1px solid #999;
+    border-radius: 5px;
+    background: rgb(255,255,255,0.9);
+    border-left: solid 10px #1bc205;
+}
+.info p.info-title {
+    font-size: 14px; font-weight: 400; font-family: Helvetica, "游ゴシック", sans-serif;
+    color:#333;
+    margin: 0; 
+    padding: 0;
+}
+.info p.comments {
+    font-size: 11px; font-weight: 400; font-family: Helvetica, "游ゴシック", sans-serif;
+    color:#333;
+    text-align:left;
+    margin: 2px 0; 
+    padding: 0;
+}
+.info select{
+    font-size: 13px; font-weight: 400; font-family: Helvetica, "游ゴシック", sans-serif;
+    color:#333;
+    text-align:center;
+    background: transparent;
+    width: 100px;
+    height: 24px;
+    border-radius: 5px;
+    border: 1px solid rgb(135, 200, 235);
+}
+
+.leaflet-tooltip.class-tooltip {
+    background: transparent;
+    border: 1px solid transparent;
+    box-shadow: 1px 1px 1px transparent;
+    /*width: 50px;*/
+    /*height: 3px;*/
+}
+
+.leaflet-tooltip-left.class-tooltip::before {
+    border-left-color: #333;
+}
+  
+.leaflet-tooltip-right.class-tooltip::before {
+    border-right-color: #333;
+}
+
+.leaflet-control-layers label {
+    margin: 0.2rem;
+}
+
+.leaflet-control-container .leaflet-top,
+.leaflet-control-container .leaflet-bottom {
+  will-change: transform;
+}
