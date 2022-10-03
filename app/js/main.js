@@ -75,10 +75,12 @@ function onEachFeature_nursery_kl(feature, layer){
     if (feature.properties.st_status_flag == "新設_保育園"){
         popupContent =
         '<table class="tablestyle02">'+
-        '<tr><td>名称</td><td><a href="https://www.google.com/search?q=柏市+'+(feature.properties.st_name)+'" target="_blank">'+(feature.properties.st_name)+'</a></td></tr>'+
+        '<tr><td>名称</td><td>'+(feature.properties.st_name)+'</td></tr>'+
+        '<tr><td>リンク</td><td><p class="remarks"><a href="https://www.google.com/search?q=柏市+'+(feature.properties.st_name)+'" target="_blank">Googleで検索</a>'+(feature.properties.st_url_lookmee ? (feature.properties.st_url_lookmee == "-" ? "（ルクミー未確認）" : ' ／ <a href="'+(feature.properties.st_url_lookmee)+'" target="_blank">ルクミーで見る</a>') : "") + '</p></td></tr>'+
         '<tr><td>区分</td><td>'+(feature.properties.st_type)+'</td></tr>'+
         '<tr><td>定員</td><td>'+(feature.properties.st_capacity == "-" ? "確認中" : feature.properties.st_capacity)+'（2023年4月開園予定）</td></tr>'+
         '<tr><td>時間<p class="remarks">(要確認)</p></td><td>開園：'+(feature.properties.st_open_hour)+'<br>'+'保育標準：'+(feature.properties.st_std_time)+'<br>'+'保育短：'+(feature.properties.st_short_time)+'</td></tr>'+
+        '<tr><td>駐車場</td><td>'+(feature.properties.st_parking == "-" ? "確認中" : feature.properties.st_parking)+'台（予定）</td></tr>'+
         '<tr><td>対象年齢</td><td>'+(feature.properties.st_age_info)+'</td></tr>'+
         '<tr><td>0歳</td><td>' + (feature.properties.st_age0_num == "-" ? "新設につき確認中" : "新設（"+(feature.properties.st_age0_num)+"人受入予定）") + '</td></tr>'+
         '<tr><td>1歳</td><td>' + (feature.properties.st_age1_num == "-" ? "新設につき確認中" : "新設（"+(feature.properties.st_age1_num)+"人受入予定）") + '</td></tr>'+
@@ -91,17 +93,20 @@ function onEachFeature_nursery_kl(feature, layer){
     else if (feature.properties.st_status_flag != "既設_保育園"){
         popupContent = 
         '<table class="tablestyle02">'+
-        '<tr><td>名称</td><td><a href="https://www.google.com/search?q=柏市+'+(feature.properties.st_name)+'" target="_blank">'+(feature.properties.st_name)+'</a></td></tr>'+
+        '<tr><td>名称</td><td>'+(feature.properties.st_name)+'</td></tr>'+
+        '<tr><td>リンク</td><td><p class="remarks"><a href="https://www.google.com/search?q=柏市+'+(feature.properties.st_name)+'" target="_blank">Googleで検索</a>'+(feature.properties.st_url_lookmee ? (feature.properties.st_url_lookmee == "-" ? "（ルクミー未確認）" : ' ／ <a href="'+(feature.properties.st_url_lookmee)+'" target="_blank">ルクミーで見る</a>') : "") + '</p></td></tr>'+
         '<tr><td>区分</td><td>'+(feature.properties.st_type)+'</td></tr>'+
         '<tr><td>備考</td><td>'+(feature.properties.st_status_flag)+'('+(feature.properties.st_status_info)+')</td></tr></table>'
     }
     else {
         popupContent =
         '<table class="tablestyle02">'+
-        '<tr><td>名称</td><td><a href="https://www.google.com/search?q=柏市+'+(feature.properties.st_name)+'" target="_blank">'+(feature.properties.st_name)+'</a></td></tr>'+
+        '<tr><td>名称</td><td>'+(feature.properties.st_name)+'</td></tr>'+
+        '<tr><td>リンク</td><td><p class="remarks"><a href="https://www.google.com/search?q=柏市+'+(feature.properties.st_name)+'" target="_blank">Googleで検索</a>'+(feature.properties.st_url_lookmee ? (feature.properties.st_url_lookmee == "-" ? "（ルクミー未確認）" : ' ／ <a href="'+(feature.properties.st_url_lookmee)+'" target="_blank">ルクミーで見る</a>') : "") + '</p></td></tr>'+
         '<tr><td>区分</td><td>'+(feature.properties.st_type)+'</td></tr>'+
         '<tr><td>定員</td><td>'+(feature.properties.st_capacity)+'</td></tr>'+
         '<tr><td>時間<p class="remarks">(要確認)</p></td><td>開園：'+(feature.properties.st_open_hour)+'<br>'+'保育標準：'+(feature.properties.st_std_time)+'<br>'+'保育短：'+(feature.properties.st_short_time)+'</td></tr>'+
+        '<tr><td>駐車場</td><td>'+(feature.properties.st_parking == "-" ? "確認中" : feature.properties.st_parking+'台')+'</td></tr>'+
         '<tr><td>対象年齢</td><td>'+(feature.properties.st_age_info)+'</td></tr>'+
         '<tr><td>0歳</td><td>' + (feature.properties.st_age0_flag == "-" ? "対象外" : (getStatus_nursery(feature.properties.st_age0_flag)+"（"+(feature.properties.st_age0_num)+"人待ち）")) + '</td></tr>'+
         '<tr><td>1歳</td><td>' + (feature.properties.st_age1_flag == "-" ? "対象外" : (getStatus_nursery(feature.properties.st_age1_flag)+"（"+(feature.properties.st_age1_num)+"人待ち）")) + '</td></tr>'+
@@ -119,8 +124,12 @@ function onEachFeature_nursery_m(feature, layer){
     if (feature.properties && feature.properties.st_name){
         const popupContent =
         '<table class="tablestyle02">'+
-        '<tr><td>名称</td><td><a href="https://www.google.com/search?q=柏市+'+(feature.properties.st_name)+'" target="_blank">'+(feature.properties.st_name)+'</a></td></tr>'+
+        '<tr><td>名称</td><td>'+(feature.properties.st_name)+'</td></tr>'+
+        '<tr><td>リンク</td><td><p class="remarks"><a href="https://www.google.com/search?q=柏市+'+(feature.properties.st_name)+'" target="_blank">Googleで検索</a>'+(feature.properties.st_url_lookmee ? (feature.properties.st_url_lookmee == "-" ? "（ルクミー未確認）" : ' ／ <a href="'+(feature.properties.st_url_lookmee)+'" target="_blank">ルクミーで見る</a>') : "") + '</p></td></tr>'+
         '<tr><td>区分</td><td>'+(feature.properties.st_type)+'</td></tr>'+
+        '<tr><td>定員</td><td>'+(feature.properties.st_capacity)+'</td></tr>'+
+        '<tr><td>時間<p class="remarks">(要確認)</p></td><td>'+(feature.properties.st_open_hour)+'</td></tr>'+
+        '<tr><td>対象年齢</td><td>'+(feature.properties.st_age_info)+'</td></tr>'+
         '</table>';
         const popupStyle = L.popup({autoPan:true}).setContent(popupContent);
         layer.bindPopup(popupStyle);
@@ -131,7 +140,8 @@ function onEachFeature_nursery_n(feature, layer){
     if (feature.properties && feature.properties.st_name){
         const popupContent =
         '<table class="tablestyle02">'+
-        '<tr><td>名称</td><td><a href="https://www.google.com/search?q=柏市+'+(feature.properties.st_name)+'" target="_blank">'+(feature.properties.st_name)+'</a></td></tr>'+
+        '<tr><td>名称</td><td>'+(feature.properties.st_name)+'</td></tr>'+
+        '<tr><td>リンク</td><td><p class="remarks"><a href="https://www.google.com/search?q=柏市+'+(feature.properties.st_name)+'" target="_blank">Googleで検索</a>'+(feature.properties.st_url_lookmee ? (feature.properties.st_url_lookmee == "-" ? "（ルクミー未確認）" : ' ／ <a href="'+(feature.properties.st_url_lookmee)+'" target="_blank">ルクミーで見る</a>') : "") + '</p></td></tr>'+
         '<tr><td>区分</td><td>'+(feature.properties.st_type)+'</td></tr>'+
         '</table>';
         const popupStyle = L.popup({autoPan:true}).setContent(popupContent);
@@ -298,7 +308,7 @@ const baseMaps = {
     '<i class="fas fa-map-marker-alt" style="color:#555"></i><i class="fa fa-caret-right fa-fw" style="color:#555"></i>保育・こども園 0歳 待ち人数': nursery_age0_layer
 };
 
-const slidemenutitle = '<h3 align="center">柏市保育園・幼稚園マップ<br>（更新：2022年9月30日）</h3>';
+const slidemenutitle = '<h3 align="center">柏市保育園・幼稚園マップ<br>（更新：2022年10月3日）</h3>';
 let contents ='<p class="remarks" align="center">この説明画面を閉じるには、ここの右斜め上にある <i class="fa fa-backward" style="color:grey"></i> ボタンを押してください。</p>';
 contents += '<h2>凡例</h2>'
 contents += '<table border="0" bordercolor="#999" cellpadding="5" cellspacing="0"><tr><td align="right" width="120"><i class="fas fa-map-marker-alt" style="color:red"></i> :</td><td width="180">10人以上</td></tr><tr><td align="right" width="120"><i class="fas fa-map-marker-alt" style="color:orangered"></i> :</td><td width="180">6人〜9人</td></tr><tr><td align="right" width="120"><i class="fas fa-map-marker-alt" style="color:orange"></i> :</td><td width="180">3人〜5人</td></tr><tr><td align="right" width="120"><i class="fas fa-map-marker-alt" style="color:green"></i> :</td><td width="180">1人〜2人</td></tr><tr><td align="right" width="120"><i class="fas fa-map-marker-alt" style="color:#1E90FF"></i> :</td><td width="180">0人（待機児童なし）</td></tr></table>';
