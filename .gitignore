@@ -1,1 +1,4 @@
 .DS_Store
+app/css/plugin
+app/js/plugin
+app/data/tmp
