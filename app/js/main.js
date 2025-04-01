@@ -442,6 +442,21 @@ else{
     L.control.layers(baseMaps, overlayMaps, {collapsed:false}).addTo(map);
 }
 
+const searchControl = new L.control.search({
+    position: 'topright',
+    layer: nursery_age0_layer,
+    autoResize: false,
+    textErr: '該当する保育園や幼稚園が見つかりませんでした。',
+    initial: false,
+    propertyName: 'st_name',
+    hideMarkerOnCollapse: false,
+    zoom: 16,
+    minLength: 1,
+    collapsed: false,
+    textPlaceholder: '保育園等を名前で検索　　　　　　　　　' 
+});
+
+map.addControl(searchControl);
 L.control.slideMenu(slidemenutitle + contents, {width:'280px', icon:'fas fa-info'}).addTo(map);
 L.control.locate({position:'topleft', icon:'fas fa-crosshairs'}).addTo(map);
 L.control.scale({maxWidth:120, metric:true, imperial:false, position: 'topleft'}).addTo(map);
