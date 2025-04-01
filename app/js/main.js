@@ -51,17 +51,17 @@ const label_layer = new L.geoJson(label_data, {
     }
 });
 
-function getStatus_nursery(d) {
+function getStatus_nursery(d, waitingNum) {
     if (d === "〇" || d === "○") {
-        return '空きあり';
+        return '〇 空きあり';
     } else if (d === "×") {
-        return '空きなし';
+        return `× 空きなし（${waitingNum}人待ち）`;
     } else if (d === "△") {
-        return '空きなし・保育体制による受入あり';
+        return `△ 空きなし（${waitingNum}人待ち）<br><span class="status-note">保育体制によって受入可能性あり</span>`;
     } else if (/^\d+△$/.test(d)) {  // 数値 + △
-        return `${d.replace("△", "")}人空きあり`;
+        return `△ ${d.replace("△", "")}人空きあり（${waitingNum}人待ち）<br><span class="status-note">保育体制によってさらに受入可能性あり</span>`;
     } else if (/^\d+$/.test(d)) {  // 数値のみ
-        return `${d}人空きあり`;
+        return `〇 ${d}人空きあり`;
     } else {
         return '-';
     }
@@ -92,12 +92,12 @@ function onEachFeature_nursery_kl(feature, layer){
         (targetIndex > 0 ? "" : '<tr><td>時間<p class="remarks">(要確認)</p></td><td>開園：'+(feature.properties.st_open_hour)+'<br>'+'保育標準：'+(feature.properties.st_std_time)+'<br>'+'保育短：'+(feature.properties.st_short_time)+'</td></tr>')+
         (targetIndex > 0 ? "" : '<tr><td>駐車場</td><td>'+(feature.properties.st_parking == "-" ? "確認中" : feature.properties.st_parking+'台')+'</td></tr>')+
         (targetIndex > 0 ? "" : '<tr><td>対象年齢</td><td>'+(feature.properties.st_age_info)+'</td></tr>')+
-        '<tr><td>0歳</td><td>' + (feature.properties.st_age0_flag == "-" ? "対象外" : (getStatus_nursery(feature.properties.st_age0_flag)+"（"+(feature.properties.st_age0_num)+"人待ち）")) + '</td></tr>'+
-        '<tr><td>1歳</td><td>' + (feature.properties.st_age1_flag == "-" ? "対象外" : (getStatus_nursery(feature.properties.st_age1_flag)+"（"+(feature.properties.st_age1_num)+"人待ち）")) + '</td></tr>'+
-        '<tr><td>2歳</td><td>' + (feature.properties.st_age2_flag == "-" ? "対象外" : (getStatus_nursery(feature.properties.st_age2_flag)+"（"+(feature.properties.st_age2_num)+"人待ち）")) + '</td></tr>'+
-        '<tr><td>3歳</td><td>' + (feature.properties.st_age3_flag == "-" ? "対象外" : (getStatus_nursery(feature.properties.st_age3_flag)+"（"+(feature.properties.st_age3_num)+"人待ち）")) + '</td></tr>'+
-        '<tr><td>4歳</td><td>' + (feature.properties.st_age4_flag == "-" ? "対象外" : (getStatus_nursery(feature.properties.st_age4_flag)+"（"+(feature.properties.st_age4_num)+"人待ち）")) + '</td></tr>'+
-        '<tr><td>5歳</td><td>' + (feature.properties.st_age5_flag == "-" ? "対象外" : (getStatus_nursery(feature.properties.st_age5_flag)+"（"+(feature.properties.st_age5_num)+"人待ち）")) + '</td></tr>'+
+        '<tr><td>0歳</td><td>' + (feature.properties.st_age0_flag == "-" ? "対象外" : getStatus_nursery(feature.properties.st_age0_flag, feature.properties.st_age0_num)) + '</td></tr>'+
+        '<tr><td>1歳</td><td>' + (feature.properties.st_age1_flag == "-" ? "対象外" : getStatus_nursery(feature.properties.st_age1_flag, feature.properties.st_age1_num)) + '</td></tr>'+
+        '<tr><td>2歳</td><td>' + (feature.properties.st_age2_flag == "-" ? "対象外" : getStatus_nursery(feature.properties.st_age2_flag, feature.properties.st_age2_num)) + '</td></tr>'+
+        '<tr><td>3歳</td><td>' + (feature.properties.st_age3_flag == "-" ? "対象外" : getStatus_nursery(feature.properties.st_age3_flag, feature.properties.st_age3_num)) + '</td></tr>'+
+        '<tr><td>4歳</td><td>' + (feature.properties.st_age4_flag == "-" ? "対象外" : getStatus_nursery(feature.properties.st_age4_flag, feature.properties.st_age4_num)) + '</td></tr>'+
+        '<tr><td>5歳</td><td>' + (feature.properties.st_age5_flag == "-" ? "対象外" : getStatus_nursery(feature.properties.st_age5_flag, feature.properties.st_age5_num)) + '</td></tr>'+
         '</table>';
     }
     else if (feature.properties.st_status_flag == "新設_保育園"){ //新設園の場合は開園時の受入予定人数を表示
@@ -186,6 +186,9 @@ const nursery_age3_layer = new L.geoJson([], {
                                 else if (feature.properties.st_age3_flag == '-'){
                                     return L.marker(latlng, {icon: L.AwesomeMarkers.icon({icon:'', markerColor:'lightgray', prefix:'fa', html:'-'})});
                                 }
+                                else if (/^\d|^〇|^○/.test(feature.properties.st_age3_flag)) { // 数値 または 〇/○ で始まる場合
+                                    return L.marker(latlng, {icon: L.AwesomeMarkers.icon({icon:'', markerColor:'darkblue', prefix:'fa', html:'空'})});
+                                }
                                 else{
                                     return L.marker(latlng, {icon: L.AwesomeMarkers.icon({icon:'', markerColor:getColor_nursery(feature.properties.st_age3_num), prefix:'fa', html:(feature.properties.st_age3_num)})});
                                 }
@@ -204,6 +207,9 @@ const nursery_age2_layer = new L.geoJson([], {
                                 else if (feature.properties.st_age2_flag == '-'){
                                     return L.marker(latlng, {icon: L.AwesomeMarkers.icon({icon:'', markerColor:'lightgray', prefix:'fa', html:'-'})});
                                 }
+                                else if (/^\d|^〇|^○/.test(feature.properties.st_age2_flag)) { // 数値 または 〇/○ で始まる場合
+                                    return L.marker(latlng, {icon: L.AwesomeMarkers.icon({icon:'', markerColor:'darkblue', prefix:'fa', html:'空'})});
+                                }
                                 else{
                                     return L.marker(latlng, {icon: L.AwesomeMarkers.icon({icon:'', markerColor:getColor_nursery(feature.properties.st_age2_num), prefix:'fa', html:(feature.properties.st_age2_num)})});
                                 }
@@ -221,6 +227,9 @@ const nursery_age1_layer = new L.geoJson([], {
                                 }
                                 else if (feature.properties.st_age1_flag == '-'){
                                     return L.marker(latlng, {icon: L.AwesomeMarkers.icon({icon:'', markerColor:'lightgray', prefix:'fa', html:'-'})});
+                                }
+                                else if (/^\d|^〇|^○/.test(feature.properties.st_age1_flag)) { // 数値 または 〇/○ で始まる場合
+                                    return L.marker(latlng, {icon: L.AwesomeMarkers.icon({icon:'', markerColor:'darkblue', prefix:'fa', html:'空'})});
                                 }
                                 else{
                                     return L.marker(latlng, {icon: L.AwesomeMarkers.icon({icon:'', markerColor:getColor_nursery(feature.properties.st_age1_num), prefix:'fa', html:(feature.properties.st_age1_num)})});
@@ -241,7 +250,7 @@ const nursery_age0_layer = new L.geoJson([], {
                                     return L.marker(latlng, {icon: L.AwesomeMarkers.icon({icon:'', markerColor:'lightgray', prefix:'fa', html:'-'})});
                                 }
                                 else if (/^\d|^〇|^○/.test(feature.properties.st_age0_flag)) { // 数値 または 〇/○ で始まる場合
-                                    return L.marker(latlng, {icon: L.AwesomeMarkers.icon({icon:'', markerColor:'blue', prefix:'fa', html:'〇'})});
+                                    return L.marker(latlng, {icon: L.AwesomeMarkers.icon({icon:'', markerColor:'darkblue', prefix:'fa', html:'空'})});
                                 }
                                 else{
                                     return L.marker(latlng, {icon: L.AwesomeMarkers.icon({icon:'', markerColor:getColor_nursery(feature.properties.st_age0_num), prefix:'fa', html:(feature.properties.st_age0_num)})});
@@ -414,10 +423,10 @@ const baseMaps = {
     '<i class="fas fa-map-marker-alt" style="color:#999"></i><i class="fa fa-caret-right fa-fw" style="color:#555"></i>保育・こども園 非表示': nursery_o_layer
 };
 
-const slidemenutitle = '<h3 align="center">柏市保育園・幼稚園マップ<br>（更新：2025年3月1日）</h3>';
+const slidemenutitle = '<h3 align="center">柏市保育園・幼稚園マップ<br>（更新：2025年4月1日）</h3>';
 let contents ='<p class="remarks" align="center">この説明画面を閉じるには、ここの右斜め上にある <i class="fa fa-backward" style="color:grey"></i> ボタンを押してください。</p>';
 contents += '<h2>凡例</h2>'
-contents += '<table border="0" bordercolor="#999" cellpadding="5" cellspacing="0"><tr><td align="right" width="120"><i class="fas fa-map-marker-alt" style="color:red"></i> :</td><td width="180">10人以上</td></tr><tr><td align="right" width="120"><i class="fas fa-map-marker-alt" style="color:orangered"></i> :</td><td width="180">6人〜9人</td></tr><tr><td align="right" width="120"><i class="fas fa-map-marker-alt" style="color:orange"></i> :</td><td width="180">3人〜5人</td></tr><tr><td align="right" width="120"><i class="fas fa-map-marker-alt" style="color:green"></i> :</td><td width="180">1人〜2人</td></tr><tr><td align="right" width="120"><i class="fas fa-map-marker-alt" style="color:#1E90FF"></i> :</td><td width="180">0人（待機児童なし）</td></tr></table>';
+contents += '<table border="0" bordercolor="#999" cellpadding="5" cellspacing="0"><tr><td align="right" width="120"><i class="fas fa-map-marker-alt" style="color:red"></i> :</td><td width="180">10人以上</td></tr><tr><td align="right" width="120"><i class="fas fa-map-marker-alt" style="color:orangered"></i> :</td><td width="180">6人〜9人</td></tr><tr><td align="right" width="120"><i class="fas fa-map-marker-alt" style="color:orange"></i> :</td><td width="180">3人〜5人</td></tr><tr><td align="right" width="120"><i class="fas fa-map-marker-alt" style="color:green"></i> :</td><td width="180">1人〜2人</td></tr><tr><td align="right" width="120"><i class="fas fa-map-marker-alt" style="color:#1E90FF"></i> :</td><td width="180">0人（待機児童なし）</td></tr><tr><td align="right" width="120"><i class="fas fa-map-marker-alt" style="color:#00008b"></i> :</td><td width="180">空きあり</td></tr></table>';
 contents += '<h2>説明</h2><p align="left"><ul><li>このウェブページは「<a href="https://www.city.kashiwa.lg.jp/haguhagu/shisetsu/ninteikodomoen/index.html" target="_blank">柏市　こどもをはぐくむ柏市子育てサイト　はぐはぐ柏</a>」の情報を参照して、当サイト管理者が独自に加工・作成したものです。</li>'
 contents += '<li>この他に<a href="https://kashiwa.co-place.com/nursery/capacity/" target="_blank">柏市保育園の2024年4月入園者の受入予定人数マップ</a>も公開しています。</li>'
 contents += '<li>保育園の空き状況は「<a href="https://www.city.kashiwa.lg.jp/hoikuunei/haguhagu/hokatsu/joho/akijokyo.html" target="_blank">はぐはぐ柏（柏市こども部保育運営課）保育園等の空き状況」</a>を参照しています。</li>'

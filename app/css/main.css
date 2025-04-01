@@ -163,3 +163,43 @@ ul, li {
 .leaflet-control-container .leaflet-bottom {
   will-change: transform;
 }
+
+/* ポップアップのスタイル調整 */
+.leaflet-popup-content {
+    width: 340px !important;
+    margin: 8px;
+}
+
+.leaflet-popup {
+    min-width: 340px;
+}
+
+.leaflet-popup-content table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.leaflet-popup-content table td:first-child {
+    width: 60px;
+    white-space: nowrap;
+    font-weight: bold;
+    color: #555;
+}
+
+.leaflet-popup-content table td:last-child {
+    width: 240px;
+    word-wrap: break-word;
+}
+
+.leaflet-popup-content table td {
+    padding: 4px 8px;
+    border-bottom: 1px solid #eee;
+}
+
+/* ステータス注記のスタイル */
+.status-note {
+    font-size: 0.8em;
+    color: #777;
+    font-weight: normal;
+}
