@@ -14,7 +14,7 @@ const map = L.map('map', {
 
 L.control.condensedAttribution({
     emblem: '&copy;',
-    prefix: '<a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet-Слава Україні!</a> | <a href="https://openstreetmap.org">OpenStreetMap contributors</a> | <a href="https://www.city.kashiwa.lg.jp/haguhagu/index.html" target="_blank">柏市子育て情報 はぐはぐ柏</a> | <a href="https://github.com/sanskruthiya/kashiwa-nursery" target="_blank">Github</a>'
+    prefix: '<a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet-Слава Україні!</a> | <a href="https://openstreetmap.org">OpenStreetMap contributors</a> | <a href="https://www.city.kashiwa.lg.jp/haguhagu/index.html" target="_blank">柏市子育て情報 はぐはぐ柏</a> | <a href="https://github.com/sanskruthiya/kashiwa-nursery" target="_blank">GitHub</a>'
   }).addTo(map);
 
 const bounds = [[36.2000,139.8000], [35.5000,140.4000]];
@@ -433,7 +433,7 @@ contents += '<li>保育園の空き状況は「<a href="https://www.city.kashiwa
 contents += '<li>各施設の場所の情報は「<a href="https://www.city.kashiwa.lg.jp/kodomoseisaku/haguhagu/kosodatemap/map.html" target="_blank">はぐはぐ柏　子育ててマップ」</a>や「<a href="https://www.city.kashiwa.lg.jp/databunseki/shiseijoho/jouhoukoukai/opendate/childsupport.html" target="_blank">柏市オープンデータ　子育て支援施設」</a>を参照しつつ、当サイト管理者の独自調査も含めて加工しています。</li>'
 contents += '<li><span class="style01">柏市内に滞在中であれば</span>、スマートフォンなどお使いの機器の位置情報取得を許可し、<i class="fas fa-crosshairs" style="color:black"></i>　ボタンを押すことで、<span class="style01">現在位置を表示</span>することができます。</li>'
 contents += '<li>なお、本ウェブサイトがご利用者様の位置情報等を含め<span class="style01">個人情報を記録することは一切ございません</span>のでご安心ください。</li>'
-contents += '<li>ご意見等は<a href="https://form.run/@party--1681740493" target="_blank">問い合わせフォーム（外部サービス）</a>からお知らせください。</li></ul></p><p align="center"><a href="https://twitter.com/smille_feuille" target="_blank"><i class="fab fa-twitter-square" style="color:lightblue"></i> twitter@Smille_feuille</a></p><hr class="style01">';
+contents += '<li>ご意見等は<a href="https://form.run/@party--1681740493" target="_blank">問い合わせフォーム（外部サービス）</a>からお知らせください。</li></ul></p><p align="center"><a href="https://twitter.com/smille_feuille" target="_blank"><i class="fab fa-twitter-square" style="color:lightblue"></i> twitter@Smille_feuille</a><br>View code on <a href="https://github.com/sanskruthiya/kashiwa-nursery" target="_blank">GitHub</a></p><hr class="style01">';
 
 if (L.Browser.mobile) {
     L.control.layers(baseMaps, overlayMaps, {collapsed:true}).addTo(map).expand();
